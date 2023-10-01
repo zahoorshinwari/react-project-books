@@ -21,6 +21,8 @@ function App() {
     // it has two argument 
     // 1) function that contain code we want to run
     // 2) second is array or nothing
+    // the empty array are used that we will call the above fetchdata function only one time
+    // the second argument are going to control exactly when the arrow function gets called
     useEffect(() => {
         fetchBooks();
     } , []);
@@ -28,10 +30,21 @@ function App() {
 
     
 
-    const editBookById = (id, newTitle) => {
+    // doing changes in books
+    const editBookById = async (id, newTitle) => {
+        const response = await axios.put(`http://localhost:3001/books/${id}`, {
+        title: newTitle    
+        });
+
+
         const updatedBooks = books.map((book) => {
             if (book.id === id) {
-                return { ...book, title: newTitle };
+                // here we can edit the book title directly
+                // return { ...book, title: newTitle };
+
+                // here we are editing the book title and take it's all 
+                // editable information 
+                return {...book, ...response.data};
             } 
 
             return book;
@@ -41,7 +54,12 @@ function App() {
     }
 
 
-    const deleteBookById = (id) => {
+
+    // deleting the books
+    const deleteBookById = async (id) => {
+
+        await axios.delete(`http://localhost:3001/books/${id}`);
+
         const updatedBooks = books.filter((book) => {
             
             return book.id !== id; 

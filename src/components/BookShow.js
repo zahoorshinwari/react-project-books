@@ -1,5 +1,6 @@
 import { useState } from "react";
 import BookEdit from "./BookEdit";
+import './Content.css'
 
 
 function BookShow({ book  , onDelete, onEdit}) {
@@ -39,7 +40,7 @@ function BookShow({ book  , onDelete, onEdit}) {
             src={`https://picsum.photos/seed/${book.id}/300/300`}
         />
         
-            <div>
+            <div className="content">
                 {content}
             </div>
             <div className="actions">
