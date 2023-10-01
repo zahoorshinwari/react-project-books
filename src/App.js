@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState , useEffect} from 'react'
 import axios from 'axios';
 import BookCreate from './components/BookCreate';
 import BookList from './components/BookList';
@@ -8,6 +8,25 @@ function App() {
 
     const [books , setBooks] = useState ([]);
 
+    // this is used to refresh the page to show all the books list
+    const fetchBooks = async () => {
+        const response = await axios.get('http://localhost:3001/books');
+
+        setBooks(response.data);
+    }
+
+    // the below are the useEffect 
+    // it is used to run the code when a components is initially 
+    // rendered and (sometimes) when it is rerendered
+    // it has two argument 
+    // 1) function that contain code we want to run
+    // 2) second is array or nothing
+    useEffect(() => {
+        fetchBooks();
+    } , []);
+
+
+    
 
     const editBookById = (id, newTitle) => {
         const updatedBooks = books.map((book) => {
@@ -40,9 +59,6 @@ function App() {
             title: title
 
         })
-        console.log(response);
-
-
             // creating the new books
         const updatedBooks = [...books,response.data];
         
