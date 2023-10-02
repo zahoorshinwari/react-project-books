@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState , useContext } from "react";
 import BookEdit from "./BookEdit";
 import './Content.css'
+import BooksContext from "../context/books";
 
 
-function BookShow({ book  , onDelete, onEdit}) {
+function BookShow({ book }) {
+    // this state is used to show the edited books 
     const [showEdit, setShowEdit] = useState(false);
+
+    // use the context
+    const { deleteBookById } = useContext(BooksContext);
 
 
 
@@ -14,15 +19,14 @@ function BookShow({ book  , onDelete, onEdit}) {
 
 
     const handleDeleteClick = () => {
-        onDelete(book.id);
+        deleteBookById(book.id);
     };
 
 
     // it is used to show again the book title when edited
     // when handleSubmit pass to bookEdit then the onEdit is already pass to it.
-    const  handleSubmit = (id , newTitle) => {
-        setShowEdit(false)
-        onEdit( id , newTitle)
+    const  handleSubmit = () => {
+        setShowEdit(false); 
     }
 
     let content = <h3>{book.title}</h3>

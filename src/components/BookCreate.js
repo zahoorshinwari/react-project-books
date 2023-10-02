@@ -1,8 +1,11 @@
- import { useState } from "react";
+ import { useState , useContext } from "react";
+ import BooksContext from "../context/books";
 
-
-function BookCreate({onCreate}) {
+function BookCreate() {
     const [title , setTitle] = useState('');
+    
+    // here using the context
+    const {createBook} = useContext(BooksContext)
 
 
     const handleChange = (event) =>{
@@ -13,7 +16,7 @@ function BookCreate({onCreate}) {
         // it is used that the form can't submit automatically
         event.preventDefault();
 
-        onCreate(title);
+        createBook(title);
         // when user click then again assign empty string to input
         setTitle('');
     };
