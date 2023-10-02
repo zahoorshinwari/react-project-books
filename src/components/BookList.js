@@ -4,12 +4,21 @@ import BookShow from "./BookShow";
 
 function BookList({ books  , onDelete , onEdit}) {
 
-    const value = useContext(BooksContext);
+    
+
+    const { count , incrementCount } = useContext(BooksContext);
+
     const renderedBooks = books.map ((book) => {
 
         return <BookShow onEdit={onEdit} onDelete={onDelete} key={book.id}  book={ book} />
     })
-     return <div className="book-list"> {value} {renderedBooks}</div>
-}
+     return (
+     <div className="book-list"> 
+        {count}
+        <button onClick={incrementCount}>click</button> 
+        {renderedBooks}
+     </div>
+     )
+    }
  
 export default BookList; 
