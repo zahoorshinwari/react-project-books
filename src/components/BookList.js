@@ -1,11 +1,13 @@
-import { useContext } from "react";
-import BooksContext from "../context/books";
 import BookShow from "./BookShow";
+import useBooksContext from "../hooks/use-books-context";
 
+
+
+// the below are custom hook
+// which has tiny small logic in it 
+// and we are using it.
 function BookList() {
-
-    // here is the context used
-    const {books} = useContext(BooksContext);
+    const {books} = useBooksContext();
 
     
 
