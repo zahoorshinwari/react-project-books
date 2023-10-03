@@ -3,7 +3,7 @@
 // any type of data can become shared.
 
 
-import { createContext , useState } from "react";
+import { createContext , useState , useCallback } from "react";
 import axios from "axios";
 
 // bookscontext has two components
@@ -19,11 +19,19 @@ function Provider ({ children }) {
     const [books , setBooks] = useState ([]);
   
     // this is used to refresh the page to show all the books list
-    const fetchBooks = async () => {
+    
+    
+    // another hook function 
+    // useCallback (it is the function that are provided to us by react that add some additional functionality to our components)
+    // useCallback function is used that our function isn't changing overtime
+    // now using the useCallback hooks the fetchbooks function will not changing overtime 
+    const fetchBooks = useCallback(async () => {
         const response = await axios.get('http://localhost:3001/books');
 
         setBooks(response.data);
-    }
+    }, [] );
+
+    
 
 
      // doing changes in books

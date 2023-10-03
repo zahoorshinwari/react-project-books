@@ -20,7 +20,7 @@ function App() {
     // the second argument are going to control exactly when the arrow function gets called
     useEffect(() => {
         fetchBooks();
-    } , []);
+    } , [fetchBooks]);
 
 
     return ( 
@@ -34,3 +34,6 @@ function App() {
    
     }    
     export default App; 
+
+
+
